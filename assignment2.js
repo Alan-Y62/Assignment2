@@ -10,8 +10,15 @@ Array.prototype.myEach = function(callbackFn) {
 };
 
 // MAP //
-Array.prototype.myMap = function() {
-
+Array.prototype.myMap = function(callbackFn) {
+    let newArr = []
+    for(let i = 0; i < this.length; i++) {
+        if(this[i] === undefined) { //if element in arr undefined skip
+            continue
+        }
+        newArr[i] = callbackFn(this[i],i,this) //apply function to element in arr
+    }
+    return newArr
 };
 
 // FILTER //
@@ -69,3 +76,8 @@ Object.grabKeys = function() {
 Object.grabValues = function() {
 
 };
+
+let arr = [1,2,3,4]
+
+console.log(arr.map(x=>x*2))
+console.log(arr.myMap(x=>x*2))
