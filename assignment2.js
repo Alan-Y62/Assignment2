@@ -11,29 +11,33 @@ Array.prototype.myEach = function(callbackFn) {
 
 // MAP //
 Array.prototype.myMap = function(callbackFn) {
-    let newArr = []
+    let newArr = [] //new Arr that gets pushed at the end
     for(let i = 0; i < this.length; i++) {
         if(this[i] === undefined) { //if element in arr undefined skip
             continue
         }
         newArr[i] = callbackFn(this[i],i,this) //apply function to element in arr
     }
+    //returns newArr with new mapped values
     return newArr
 };
 
 // FILTER //
 Array.prototype.myFilter = function(callbackFn) {
-    let newArr = []
-    let newArr_i = 0
+    let newArr = [] //new arr that gets pushed at the end
+    let newArr_i = 0 //set index for newArr
     for(let i = 0; i < this.length; i++) {
         if(this[i] === undefined) { //if element in arr undefined skip
             continue
         }
         if(callbackFn(this[i],i,this)) {
-            newArr[newArr_i] = this[i]
+            //adds arr[i] value to newArr if passed callbackFn
+            newArr[newArr_i] = this[i] 
+            //increment newArr position
             newArr_i++
         }
     }
+    //returns newArr with items filtered
     return newArr
 };
 
@@ -43,10 +47,13 @@ Array.prototype.mySome = function(callbackFn) {
         if(this[i] === undefined) { //if element in arr undefined skip
             continue
         }
+        //if callbackFn returns true
         if(callbackFn(this[i],i,this)) {
+            //returns true if any value passed the test
             return true
         }
     }
+    //can only get here if every value failed the test
     return false
 };
 
@@ -56,11 +63,14 @@ Array.prototype.myEvery = function(callbackFn) {
         if(this[i] === undefined) { //if element in arr undefined skip
             continue
         }
-        if(!callbackFn(this[i],i,this)) {
+        //if callbackFn returns false
+        if(!callbackFn(this[i],i,this)) { 
+            //return false immediately cause at least one value did not pass the check
             return false
         }
     }
-    return true
+    //can only get here if every value passed the test
+    return true //returns true
 };
 
 // REDUCE //
@@ -80,13 +90,13 @@ Array.prototype.myIndexOf = function() {
 
 // PUSH //
 Array.prototype.myPush = function(...args) {
-    let args_i = 0
-    let length = this.length
+    let args_i = 0 //sets variable for the first arg in function call
+    let length = this.length //sets variable for pos of arr after the last
     for(let j = length; j < length + args.length; j++) {
-        this[j] = args[args_i]
-        args_i++
+        this[j] = args[args_i] //adds arg[args_i] value to arr[i]
+        args_i++ //increment arg position for next value in function call
     }
-    return this.length
+    return this.length //return the legnth of the arr with added args
 };
 
 // LASTINDEXOF //
