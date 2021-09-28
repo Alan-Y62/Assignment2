@@ -1,6 +1,12 @@
 // FOR EACH //
-Array.prototype.myEach = function() {
-    
+Array.prototype.myEach = function(callbackFn) {
+    //iterate through arr
+    for(let i = 0; i < this.length; i++) {
+        if(this[i] === undefined) { //if element in arr undefined skip
+            continue
+        }
+        callbackFn(this[i],i,this) //apply function to element in arr
+    }
 };
 
 // MAP //
