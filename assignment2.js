@@ -74,8 +74,36 @@ Array.prototype.myEvery = function(callbackFn) {
 };
 
 // REDUCE //
-Array.prototype.myReduce = function() {
-
+Array.prototype.myReduce = function(callbackFn,start) {
+    //set currentValue to start arg
+    let currentValue = start
+    //if currentValue is not undefined 
+    if(currentValue !== undefined) {
+        for(let i = 0; i < this.length; i++) {
+            if(this[i] === undefined) { //if element in arr undefined skip
+                continue
+            }
+            //set currentValue to the return value of callbackFn
+            currentValue = callbackFn(currentValue,this[i],i,this)
+        }
+    }
+    //if currentValue is undefined
+    else {
+        //set currentValue to first value in arr if not undefined
+        if(arr[0] !== undefined) {
+            currentValue += arr[0]
+        }
+        for(let i = 1; i < this.length; i++) {
+            //if arr[i] or arr[i+1] is undefined, skip
+            if(this[i] === undefined) { 
+                continue
+            }
+            //set currentValue to the return value of callbackFn
+            currentValue = callbackFn(currentValue,this[i],i,this)
+        }
+    }
+    //return final currentValue
+    return currentValue
 };
 
 // INCLUDES //
@@ -114,7 +142,7 @@ Object.grabValues = function() {
 
 };
 
-let arr = [1,4,3,7]
+let arr = [,,1,4,3,7]
 
 console.log('Built in function then created function')
 //forEach checks
@@ -154,10 +182,16 @@ console.log(arr.mySome(even))
 //every checks
 console.log('Every checks')
 console.log('Less than 400')
-const isBelow400 = (currentValue) => currentValue < 400;
+const isBelow400 = (currentValue) => currentValue < 400
 console.log(arr.every(isBelow400))
 console.log(arr.myEvery(isBelow400))
-const isBelow300 = (currentValue) => currentValue < 300;
+const isBelow300 = (currentValue) => currentValue < 300
 console.log('Less than 300')
 console.log(arr.every(isBelow300))
 console.log(arr.myEvery(isBelow300))
+
+//reduce checks
+console.log('Reduce checks')
+const reducer = (previousValue, currentValue) => previousValue + currentValue
+console.log(arr.reduce(reducer))
+console.log(arr.myReduce(reducer))
