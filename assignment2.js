@@ -51,8 +51,16 @@ Array.prototype.mySome = function(callbackFn) {
 };
 
 // EVERY //
-Array.prototype.myEvery = function() {
-
+Array.prototype.myEvery = function(callbackFn) {
+    for(let i = 0; i < this.length; i++) {
+        if(this[i] === undefined) { //if element in arr undefined skip
+            continue
+        }
+        if(!callbackFn(this[i],i,this)) {
+            return false
+        }
+    }
+    return true
 };
 
 // REDUCE //
@@ -96,7 +104,7 @@ Object.grabValues = function() {
 
 };
 
-let arr = [1,2,3,7]
+let arr = [1,4,3,7]
 
 console.log('Built in function then created function')
 //forEach checks
@@ -123,6 +131,23 @@ console.log(arr.myFilter(x=>x>2))
 
 //some checks
 console.log('Some checks')
-const even = (element) => element === 2
+const two = (element) => element === 2
+console.log('Any value is 2')
+console.log(arr.some(two))
+console.log(arr.mySome(two))
+const even = (element) => element % 2 === 0
+console.log('Any value is even')
 console.log(arr.some(even))
 console.log(arr.mySome(even))
+
+
+//every checks
+console.log('Every checks')
+console.log('Less than 400')
+const isBelow400 = (currentValue) => currentValue < 400;
+console.log(arr.every(isBelow400))
+console.log(arr.myEvery(isBelow400))
+const isBelow300 = (currentValue) => currentValue < 300;
+console.log('Less than 300')
+console.log(arr.every(isBelow300))
+console.log(arr.myEvery(isBelow300))
