@@ -22,8 +22,19 @@ Array.prototype.myMap = function(callbackFn) {
 };
 
 // FILTER //
-Array.prototype.myFilter = function() {
-
+Array.prototype.myFilter = function(callbackFn) {
+    let newArr = []
+    let newArr_i = 0
+    for(let i = 0; i < this.length; i++) {
+        if(this[i] === undefined) { //if element in arr undefined skip
+            continue
+        }
+        if(callbackFn(this[i],i,this) === true) {
+            newArr[newArr_i] = this[i]
+            newArr_i++
+        }
+    }
+    return newArr
 };
 
 // SOME //
@@ -79,5 +90,6 @@ Object.grabValues = function() {
 
 let arr = [1,2,3,4]
 
-console.log(arr.map(x=>x*2))
-console.log(arr.myMap(x=>x*2))
+console.log(arr.filter(x=>x>2))
+console.log(arr.myFilter(x=>x>2))
+
