@@ -90,6 +90,20 @@ Object.grabValues = function() {
 
 let arr = [1,2,3,4]
 
+//forEach checks
+arr.forEach(x => console.log(x))
+arr.myEach(x => console.log(x))
+
+//push checks
+arr.push(10,20)
+arr.myPush(232,321)
+console.log(arr)
+
+//map checks
+console.log(arr.map(x => x*2))
+console.log(arr.myMap(x => x*2))
+
+//filter checks
 console.log(arr.filter(x=>x>2))
 console.log(arr.myFilter(x=>x>2))
 
