@@ -45,8 +45,14 @@ Array.prototype.myIndexOf = function() {
 };
 
 // PUSH //
-Array.prototype.myPush = function() {
-
+Array.prototype.myPush = function(...args) {
+    let args_i = 0
+    let length = this.length
+    for(let j = length; j < length + args.length; j++) {
+        this[j] = args[args_i]
+        args_i++
+    }
+    return this.length
 };
 
 // LASTINDEXOF //
