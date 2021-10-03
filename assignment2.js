@@ -107,8 +107,23 @@ Array.prototype.myReduce = function(callbackFn,start) {
 };
 
 // INCLUDES //
-Array.prototype.myIncludes = function() {
-
+Array.prototype.myIncludes = function(item, start) {
+    let i = 0;
+    if(this.length + start > 0) {
+        return false
+    }
+    if(start !== undefined) {
+        i = start;
+    }
+    for(i; i< this.length; i++) {
+        if(this[i] === undefined) {
+            continue
+        }
+        if(this[i] === item) {
+            return true
+        }
+    }
+    return false
 };
 
 // INDEXOF //
@@ -128,8 +143,25 @@ Array.prototype.myPush = function(...args) {
 };
 
 // LASTINDEXOF //
-Array.prototype.myLastIndexOf = function() {
-
+Array.prototype.myLastIndexOf = function(item, start) {
+    let i = this.length - 1
+    if(start !== undefined) {
+        if(this.length + start < 0) {
+            return -1
+        }
+        if(start < 0) {
+            i += start
+        }
+        if(start > 0 && start < i) {
+            i -= start
+        }
+    }
+    for(i; i >= 0; i--) {
+        if(this[i] === item) {
+            return i
+        }
+    }
+    return -1
 };
 
 // KEYS //
@@ -195,3 +227,28 @@ console.log('Reduce checks')
 const reducer = (previousValue, currentValue) => previousValue + currentValue
 console.log(arr.reduce(reducer))
 console.log(arr.myReduce(reducer))
+
+//includes checks
+console.log('Includes checks')
+const arrnum = [1,3,5,29,74,31,69]
+console.log(arrnum.includes(2))
+console.log(arrnum.myIncludes(2))
+console.log('search for 5 starting at pos -10')
+console.log(arrnum.includes(5,-10))
+console.log(arrnum.myIncludes(5,-10))
+console.log('search for 5 starting at pos -1')
+console.log(arrnum.includes(5,-1))
+console.log(arrnum.myIncludes(5,-1))
+
+//lastIndexOf
+console.log('LastIndexOf checks')
+const arrnum2 = [1,3,5,29,3,31,69]
+console.log(arrnum2.lastIndexOf(3))
+console.log(arrnum2.myLastIndexOf(3))
+console.log('if index is negative, -4')
+console.log(arrnum2.lastIndexOf(3,-4))
+console.log(arrnum2.myLastIndexOf(3,-4))
+console.log('if index is greater than array length')
+console.log(arrnum2.lastIndexOf(3,100))
+console.log(arrnum2.myLastIndexOf(3,100))
+
