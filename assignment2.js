@@ -127,8 +127,25 @@ Array.prototype.myIncludes = function(item, start) {
 };
 
 // INDEXOF //
-Array.prototype.myIndexOf = function() {
-
+Array.prototype.myIndexOf = function(item, start) {
+    let i = 0
+    if(start !== undefined && start !== 0) {
+        if(start > this.length) {
+            return -1
+        }
+        if(start < 0) {
+            i = this.length + start
+        }
+        else {
+            i = start
+        }
+    }
+    for(i; i < this.length; i++) {
+        if(this[i] === item) {
+            return i
+        }
+    }
+    return -1
 };
 
 // PUSH //
@@ -252,3 +269,19 @@ console.log('if index is greater than array length')
 console.log(arrnum2.lastIndexOf(3,100))
 console.log(arrnum2.myLastIndexOf(3,100))
 
+//IndexOf
+console.log('IndexOf Checks')
+console.log(arrnum2.indexOf(3))
+console.log(arrnum2.myIndexOf(3))
+console.log('Provided start index of 3')
+console.log(arrnum2.indexOf(3,3))
+console.log(arrnum2.myIndexOf(3,3))
+console.log('Provided start index of 10')
+console.log(arrnum2.indexOf(3,10))
+console.log(arrnum2.myIndexOf(3,10))
+console.log('Provided start index of -5')
+console.log(arrnum2.indexOf(3,-5))
+console.log(arrnum2.myIndexOf(3,-5))
+console.log('Provided start index of -10')
+console.log(arrnum2.indexOf(3,-10))
+console.log(arrnum2.myIndexOf(3,-10))
