@@ -204,8 +204,13 @@ Object.grabKeys = function(object) {
 };
 
 // VALUES //
-Object.grabValues = function() {
-
+Object.grabValues = function(object) {
+    const keys1 = Object.keys(object)
+    let values = []
+    for(let i = 0; i < keys1.length; i++) {
+        values.push(object[keys1[i]])
+    }
+    return values
 };
 
 let arr = [,,1,4,3,7]
@@ -312,3 +317,7 @@ const obj = {
 console.log('Keys check')
 console.log(Object.keys(obj))
 console.log(Object.grabKeys(obj))
+
+console.log('values check')
+console.log(Object.values(obj))
+console.log(Object.grabValues(obj))
