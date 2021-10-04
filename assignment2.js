@@ -76,7 +76,10 @@ Array.prototype.myEvery = function(callbackFn) {
 // REDUCE //
 Array.prototype.myReduce = function(callbackFn,start) {
     //set currentValue to start arg
-    let currentValue = start
+    let currentValue = 0
+    if(start !== undefined) {
+        currentValue = start
+    }
     //if currentValue is not undefined 
     if(currentValue !== undefined) {
         for(let i = 0; i < this.length; i++) {
@@ -100,6 +103,7 @@ Array.prototype.myReduce = function(callbackFn,start) {
             }
             //set currentValue to the return value of callbackFn
             currentValue = callbackFn(currentValue,this[i],i,this)
+            console.log(currentValue)
         }
     }
     //return final currentValue
@@ -109,11 +113,19 @@ Array.prototype.myReduce = function(callbackFn,start) {
 // INCLUDES //
 Array.prototype.myIncludes = function(item, start) {
     let i = 0;
-    if(this.length + start > 0) {
+    if(this.length < start) {
         return false
     }
     if(start !== undefined) {
-        i = start;
+        if(start < 0) {
+            i = this.length + start
+            if(i <= 0) {
+                i = 0
+            }
+        }
+        else {
+            i = start;
+        }
     }
     for(i; i< this.length; i++) {
         if(this[i] === undefined) {
@@ -182,8 +194,13 @@ Array.prototype.myLastIndexOf = function(item, start) {
 };
 
 // KEYS //
-Object.grabKeys = function() {
+Object.grabKeys = function(object) {
+    let keys = []
+    let i = 0
+    for(keys[i++] in object) {
 
+    }
+    return keys
 };
 
 // VALUES //
@@ -285,3 +302,13 @@ console.log(arrnum2.myIndexOf(3,-5))
 console.log('Provided start index of -10')
 console.log(arrnum2.indexOf(3,-10))
 console.log(arrnum2.myIndexOf(3,-10))
+
+//keys check
+const obj = {
+    a: 'hello',
+    b: 'world',
+    c: '!'
+}
+console.log('Keys check')
+console.log(Object.keys(obj))
+console.log(Object.grabKeys(obj))
