@@ -197,18 +197,32 @@ Array.prototype.myLastIndexOf = function(item, start) {
 Object.grabKeys = function(object) {
     let keys = []
     let i = 0
-    for(keys[i++] in object) {
-
+    for(keys[i++] in object) { 
+        
     }
     return keys
 };
 
 // VALUES //
 Object.grabValues = function(object) {
-    const keys1 = Object.keys(object)
+    const keys1 = Object.grabKeys(object)
     let values = []
     for(let i = 0; i < keys1.length; i++) {
-        values.push(object[keys1[i]])
+        values[i] = object[keys1[i]]
     }
     return values
 };
+
+//keys check
+const obj = {
+    a: 'hello',
+    b: 'world',
+    c: '!'
+}
+console.log('Keys check')
+console.log(Object.keys(obj))
+console.log(Object.grabKeys(obj))
+
+console.log('values check')
+console.log(Object.values(obj))
+console.log(Object.grabValues(obj))
