@@ -76,39 +76,21 @@ Array.prototype.myEvery = function(callbackFn) {
 // REDUCE //
 Array.prototype.myReduce = function(callbackFn,start) {
     //set currentValue to start arg
-    let currentValue = 0
-    if(start !== undefined) {
-        currentValue = start
-    }
-    //if currentValue is not undefined 
-    if(currentValue !== undefined) {
-        for(let i = 0; i < this.length; i++) {
-            if(this[i] === undefined) { //if element in arr undefined skip
-                continue
-            }
-            //set currentValue to the return value of callbackFn
+    let currentValue = (start === undefined) ? undefined : start;
+    for(let i = 1; i < this.length; i++) {
+        //if arr[i] or arr[i+1] is undefined, skip
+        if(this[i] === undefined) { 
+            continue
+        }
+        if(currentValue !== undefined) {
             currentValue = callbackFn(currentValue,this[i],i,this)
         }
-    }
-    //if currentValue is undefined
-    else {
-        //set currentValue to first value in arr if not undefined
-        if(arr[0] !== undefined) {
-            currentValue += arr[0]
+        else {
+            currentValue = this[i]
         }
-        for(let i = 1; i < this.length; i++) {
-            //if arr[i] or arr[i+1] is undefined, skip
-            if(this[i] === undefined) { 
-                continue
-            }
-            //set currentValue to the return value of callbackFn
-            currentValue = callbackFn(currentValue,this[i],i,this)
-            console.log(currentValue)
-        }
+        //set currentValue to the return value of callbackFn
+        console.log(currentValue)
     }
-    //return final currentValue
-    return currentValue
-};
 
 // INCLUDES //
 Array.prototype.myIncludes = function(item, start) {
