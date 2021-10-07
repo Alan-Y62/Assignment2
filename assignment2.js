@@ -124,9 +124,6 @@ Array.prototype.myIncludes = function(item, start) {
 Array.prototype.myIndexOf = function(item, start) {
     let i = 0
     if(start !== undefined && start !== 0) {
-        if(start > this.length) {
-            return -1
-        }
         if(start < 0) {
             i = this.length + start
         }
